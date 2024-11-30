@@ -17,23 +17,23 @@
         session_start();
         require_once('db.php'); 
 
-        $login = isset($_POST['login']) ? $_POST['login'] : ''; 
-        $pass = isset($_POST['pass']) ? trim($_POST['pass']) : ''; 
-        $error_message = '';
+        $number = isset($_POST['login']) ? $_POST['login'] : ''; 
+        $password = isset($_POST['pass']) ?  trim($_POST['pass']) : ''; 
+
+  
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Проверка на пустые поля
-            if (empty($login) || empty($pass)) { 
+            if (empty($number) || empty($password)) { 
                 $error_message = "Заполните все поля"; 
             } else { 
-                // Хешируем пароль
-                $hashed_pass = hash('sha256', $pass);
-                $sql = "SELECT * FROM `Tenant` WHERE Phone_Number = '$login' AND Tenant_password = '$hashed_pass'"; 
+            $hashed_password = hash('sha256', $password);
+                $sql = "SELECT * FROM `Tenant` WHERE `Phone_Number` = '$number' AND `Tenant_password` = '$hashed_password'"; 
                 $result = $conn->query($sql); 
 
                 if ($result->num_rows > 0) { 
                     while ($row = $result->fetch_assoc()) { 
-                        $_SESSION['user_id'] = $row['id']; 
+                        $_SESSION['Client_ID'] = $row['Client_ID']; 
                         header("Location: index.php"); 
                         exit; 
                     } 
@@ -57,7 +57,7 @@
 
             <div class="o-form-element"> 
                 <label class="c-label">                 
-                    <input class="c-field c-field--label" name='login' type="number" placeholder="Логин" value="<?php echo htmlspecialchars($login); ?>" /> 
+                    <input class="c-field c-field--label" name='login' type="number" placeholder="Логин" value="">
                     <div role="tooltip" class="c-hint">The email used to register the account</div> 
                 </label> 
             </div> 

@@ -33,7 +33,7 @@
             
             if ($result) {
                 $userId = $conn->insert_id; 
-                $_SESSION['user_id'] = $userId;
+                $_SESSION['Client_ID'] = $userId;
                 header("Location: login.php");
                 exit;
             } else {
@@ -55,7 +55,7 @@
 
             <div class="o-form-element"> 
                 <label class="c-label">                 
-                    <input class="c-field c-field--label" type="number" name='login' placeholder="Phone_number" value="<?php echo htmlspecialchars($number); ?>" /> 
+                    <input class="c-field c-field--label" type="number" name='login' placeholder="Phone_number" value="" >
                     <div role="tooltip" class="c-hint">The number used to register the account</div> 
                 </label> 
             </div> 
